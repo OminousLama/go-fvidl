@@ -66,7 +66,6 @@ func main() {
 		if info.Mode().IsRegular() {
 			// Check if the file has a valid video extension
 			if hasValidExtension(info.Name(), filetypeSlice) {
-				// Check if the duration is greater than 29 seconds
 				currentDuration := getVideoDuration(path)
 
 				if currentDuration >= minLength && currentDuration <= maxLength {
