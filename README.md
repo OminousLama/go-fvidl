@@ -41,6 +41,7 @@ This software uses the following open source packages:
 
 - [Best README Template](https://github.com/othneildrew/Best-README-Template)
 - [Go](https://github.com/golang)
+- [Remix Icon](https://remixicon.com/)
 
 ## License
 
