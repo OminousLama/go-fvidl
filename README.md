@@ -3,7 +3,7 @@
   <br>
   <a href="https://github.com/OminousLama/go-fvidl"><img src="./docs/res/fvidl-icon.svg" alt="fvidl" width="200"></a>
   <br>
-  **F**ind **V**ideos by **L**ength
+  Find Videos by Length
   <br>
 </h1>
 
