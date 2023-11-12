@@ -9,7 +9,7 @@
 
 <h4 align="center">CLI tool made to quickly locate video files based on duration.</h4>
 
-![Demo Video](https://github.com/OminousLama/go-fvidl/raw/dev/docs/res/demo-video.mp4)
+![Demo](https://raw.githubusercontent.com/OminousLama/go-fvidl/dev/docs/res/demo-video.gif)
 
 ## Getting started
 
