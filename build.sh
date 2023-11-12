@@ -1,9 +1,15 @@
 #!/bin/bash
 
 export VERSION=$1
+export SIGNER=$2
 
 if [ -z "$VERSION" ]; then
     echo "VERSION is not defined"
+    exit 1
+fi
+
+if [ -z "$SIGNER" ]; then
+    echo "SIGNER id is not defined"
     exit 1
 fi
 
@@ -38,4 +44,4 @@ build_go_program
 GOOS=freebsd GOARCH=amd64
 build_go_program
 
-gpg --armor --detach-sign --output "./bin/SHA256SUMS.asc" --default-key "$signer" SHASUMS
+gpg --armor --detach-sign --output "./bin/SHA256SUMS.asc" --default-key "$SIGNER" SHA256SUMS
