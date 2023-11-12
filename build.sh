@@ -44,4 +44,4 @@ build_go_program
 GOOS=freebsd GOARCH=amd64
 build_go_program
 
-gpg --armor --detach-sign --output "./bin/SHA256SUMS.asc" --default-key "$SIGNER" SHA256SUMS
+gpg --armor --detach-sign --output "./bin/SHA256SUMS.asc" --default-key "$SIGNER" ./bin/SHA256SUMS
