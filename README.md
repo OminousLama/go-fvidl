@@ -24,12 +24,6 @@ sudo dnf install ffmpeg
 sudo apt install ffmpeg
 ```
 
-- go
-```bash
-# Fedora
-sudo dnf install golang
-```
-
 ### How To Use
 
 Grab the latest release from the [release page](https://github.com/OminousLama/go-fvidl/releases/latest).
