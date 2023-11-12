@@ -12,13 +12,16 @@ import (
 	"time"
 )
 
+var version string
+
 func main() {
-	// Define command-line flags
+	//#region CLI param definitions
 	dir := flag.String("dir", ".", "The directory to search")
 	//recursive := flag.Bool("recursive", false, "Search recursively")
 	filetypes := flag.String("filetypes", "mp4,mkv,avi,mov", "Comma-separated list of filetypes")
 	maxLengthInput := flag.String("maxLength", "30", "Maximum video length")
 	minLengthInput := flag.String("minLength", "0", "Minimum video length")
+	//#endregion
 
 	//#region Parse command-line flags
 	flag.Parse()
