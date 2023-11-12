@@ -9,7 +9,7 @@
 
 <h4 align="center">CLI tool made to quickly locate video files based on duration.</h4>
 
-![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif)
+![Demo](https://raw.githubusercontent.com/OminousLama/go-fvidl/dev/docs/res/demo-video.gif)
 
 ## Getting started
 
@@ -24,16 +24,27 @@ sudo dnf install ffmpeg
 sudo apt install ffmpeg
 ```
 
-- go
-```bash
-# Fedora
-sudo dnf install golang
-```
-
-### How To Use
+### Install / Download
 
 Grab the latest release from the [release page](https://github.com/OminousLama/go-fvidl/releases/latest).
 
+### Usage
+
+Use `fvidl -help` to show a list of available options.
+
+#### Examples
+
+```bash
+fvidl -min 5 -max 30 -d /my/directory/ -ft mp4,mov -r
+```
+
+This command will search for video files...
+
+- (`-d`) ...in the directory `/my/directory/`
+- (`-min`) ...longer than or equal to 5 seconds
+- (`-max`) ...shorter or equal to 30 seconds
+- (`-ft mp4,mov`) ...of type `mp4` or `mov`
+- (`-r`) ...recursively
 
 ## Credits
 
