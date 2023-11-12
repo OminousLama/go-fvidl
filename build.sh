@@ -14,9 +14,15 @@ if [ -z "$SIGNER" ]; then
 fi
 
 build_go_program() {
+    currentDateTime=$(date '+%Y-%m-%d@%H:%M:%S-%Z')
+    builderArch=$(uname -m)
+    builderOS=$(uname -s)
+
     echo "Building for ${GOOS} ${GOARCH}"
-    GOOS=linux GOARCH=amd64 go build -ldflags "-X main.version=${VERSION}" -o bin/fvidl_${VERSION}_${GOOS}_${GOARCH}
+
+    go build -ldflags "-X main.version=${VERSION} -X main.metaBuildTime=${currentDateTime} -X main.metaBuilderOS=${builderOS} -X main.metaBuilderArch=${builderArch}" -o bin/fvidl_${VERSION}_${GOOS}_${GOARCH}
     checksum=$(sha256sum bin/fvidl_${VERSION}_${GOOS}_${GOARCH} | awk '{print $1}')
+    
     echo "${checksum} - fvidl_${VERSION}_${GOOS}_${GOARCH}" >> "./bin/SHA256SUMS"
 }
 

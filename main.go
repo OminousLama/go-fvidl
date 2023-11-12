@@ -9,60 +9,51 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
-	"time"
 )
 
-var version string
+var version = "undefined"
+var metaBuildTime = "undefined"
+var metaBuilderOS = "undefined"
+var metaBuilderArch = "undefined"
 
 func main() {
 	//#region CLI param definitions
-	dir := flag.String("dir", ".", "The directory to search")
-	//recursive := flag.Bool("recursive", false, "Search recursively")
-	filetypes := flag.String("filetypes", "mp4,mkv,avi,mov", "Comma-separated list of filetypes")
-	maxLengthInput := flag.String("maxLength", "30", "Maximum video length")
-	minLengthInput := flag.String("minLength", "0", "Minimum video length")
+	showVersion := flag.Bool("v", false, "Show version information")
+	flag.BoolVar(showVersion, "version", false, "Show version information")
+
+	dir := flag.String("d", ".", "The directory to search")
+	recursive := flag.Bool("r", false, "Search recursively")
+	filetypes := flag.String("ft", "mp4,mkv,avi,mov", "Comma-separated list of filetypes")
+	maxLength := flag.Int("max", 30, "Maximum video length")
+	minLength := flag.Int("min", 0, "Minimum video length")
 	//#endregion
 
 	//#region Parse command-line flags
 	flag.Parse()
 
 	//#region Parse CLI params
-	//#region Max Length
-	maxLength := 30
-
-	if *maxLengthInput == "" {
-		fmt.Printf("Using default maxLength value: %d\n", maxLength)
-	} else {
-		if i, err := strconv.Atoi(*maxLengthInput); err == nil {
-			maxLength = i
-		} else {
-			fmt.Printf("Error: The value for maxLength is not a valid integer.", err)
-		}
-	}
-	//#endregion
-	//#region Min Length
-	minLength := 0
-
-	if *minLengthInput == "" {
-		fmt.Printf("Using default minLength value: %d\n", minLength)
-	} else {
-		if i, err := strconv.Atoi(*minLengthInput); err == nil {
-			minLength = i
-		} else {
-			fmt.Printf("Error: The value for minLength is not a valid integer.", err)
-		}
+	//#region Version info
+	if *showVersion {
+		fmt.Println("fvidl version info:")
+		fmt.Println("- Version:", version)
+		fmt.Println("- Build time:", metaBuildTime)
+		fmt.Println("- Builder OS:", metaBuilderOS)
+		fmt.Println("- Builder Arch:", metaBuilderArch)
 	}
 	//#endregion
 	//#endregion
 
-	// Split filetypes into a slice
+	//#region Directory walker
 	filetypeSlice := strings.Split(*filetypes, ",")
 
-	// Walk through the directory
 	err := filepath.Walk(*dir, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			fmt.Println(err)
 			return nil
+		}
+
+		if !*recursive && info.IsDir() && path != *dir {
+			return filepath.SkipDir
 		}
 
 		// Check if it's a regular file
@@ -71,7 +62,7 @@ func main() {
 			if hasValidExtension(info.Name(), filetypeSlice) {
 				currentDuration := getVideoDuration(path)
 
-				if currentDuration >= minLength && currentDuration <= maxLength {
+				if currentDuration >= *minLength && currentDuration <= *maxLength {
 					fmt.Printf("%s - %s seconds\n", path, strconv.Itoa(currentDuration))
 				}
 			}
@@ -79,6 +70,7 @@ func main() {
 
 		return nil
 	})
+	//#endregion
 
 	if err != nil {
 		fmt.Println(err)
@@ -124,8 +116,4 @@ func getVideoDuration(filePath string) int {
 	}
 
 	return duration
-}
-
-func formatDuration(duration time.Duration) string {
-	return fmt.Sprintf("%02d:%02d:%02d", int(duration.Hours()), int(duration.Minutes())%60, int(duration.Seconds())%60)
 }
