@@ -24,7 +24,7 @@ jobs:
         publish: false
 
     - name: Build
-      run: ./build.sh "${{ steps.release_draft.outputs.tag_name }}"
+      run: ./build.sh ${{ steps.release_draft.outputs.tag_name }}
 
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
