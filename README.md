@@ -9,7 +9,7 @@
 
 <h4 align="center">CLI tool made to quickly locate video files based on duration.</h4>
 
-![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif)
+![Demo Video](https://github.com/OminousLama/go-fvidl/raw/dev/docs/res/demo-video.mp4)
 
 ## Getting started
 
