@@ -36,5 +36,5 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: ./bin/*
+        file: ./bin
         tag: ${{ github.ref }}
